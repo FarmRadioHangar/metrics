@@ -15,7 +15,7 @@ services:
     volumes:
       - /data/influxdb:/var/lib/influxdb
       - /data/chronograf:/var/lib/chronograf
-    environments:
+    environment:
       - INFLUXDB_REPORTING_DISABLED=true
 
   chronograf:
