@@ -1,0 +1,28 @@
+version: '2'
+
+networks:
+  influxdb:
+    driver: bridge
+
+services:
+  influxdb:
+    image: influxdb
+    ports:
+      - "8083:8083"
+      - "8086:8086"
+    networks:
+      - influxdb
+    volumes:
+      - /data/influxdb:/var/lib/influxdb
+      - /data/chronograf:/var/lib/chronograf
+    environments:
+      - INFLUXDB_REPORTING_DISABLED=true
+
+  chronograf:
+    image: chronograf
+    ports:
+      - "8050:10000"
+    networks:
+      - influxdb
+    volumes:
+      - /data/chronograf:/var/lib/chronograf
